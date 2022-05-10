@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ApiClient: ApiClientProtocol {
+public class ApiClient: ApiClientProtocol {
     
     private enum Constant {
         enum Text {
@@ -15,7 +15,7 @@ class ApiClient: ApiClientProtocol {
         }
     }
     
-    var restClient: RestClient
+    public var restClient: RestClient
     
     public var isReachable: Bool {
         return restClient.isReachable
@@ -25,7 +25,8 @@ class ApiClient: ApiClientProtocol {
         self.restClient = restClient
     }
     
-    func execute<Task: NetworkTask>(task: Task, result: @escaping (Result<Task.ResponseModel?, NetworkError>) -> Void) -> URLSessionDataTask? {
+    @discardableResult
+    public func execute<Task: NetworkTask>(task: Task, result: @escaping (Result<Task.ResponseModel?, NetworkError>) -> Void) -> URLSessionDataTask? {
         
         guard isReachable else {
             result(.failure(.connection))
@@ -50,7 +51,8 @@ class ApiClient: ApiClientProtocol {
             }
         }
     }
-    func success<Task: NetworkTask>(response: ResponseDataModel, task: Task, result: @escaping (Result<Task.ResponseModel?, NetworkError>) -> Void) throws {
+    
+    public func success<Task: NetworkTask>(response: ResponseDataModel, task: Task, result: @escaping (Result<Task.ResponseModel?, NetworkError>) -> Void) throws {
         guard let data = response.data else {
             result(.failure(.invalidData))
             return
@@ -61,7 +63,7 @@ class ApiClient: ApiClientProtocol {
         result(.success(responseModel))
     }
     
-    func failure<Task: NetworkTask>(response: ResponseDataModel, task: Task, result: @escaping (Result<Task.ResponseModel?, NetworkError>) -> Void) throws {
+    public func failure<Task: NetworkTask>(response: ResponseDataModel, task: Task, result: @escaping (Result<Task.ResponseModel?, NetworkError>) -> Void) throws {
         
         guard let data = response.data else {
             result(.failure(.invalidData))

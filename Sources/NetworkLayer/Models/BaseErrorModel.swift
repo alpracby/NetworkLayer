@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BaseErrorModel: Decodable {
+public struct BaseErrorModel: Decodable {
     let statusMessage: String?
     let statusCode: Int?
     

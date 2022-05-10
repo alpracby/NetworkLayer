@@ -26,7 +26,7 @@ public class RestClient {
     
     // MARK: Execution Methods
     @discardableResult
-    public func execute<Task: NetworkTask>(task: Task, completion: @escaping (ResponseDataModel) -> Void) ->  URLSessionDataTask? {
+    public func execute<Task: NetworkTask>(task: Task, completion: @escaping (ResponseDataModel) -> Void) -> URLSessionDataTask? {
         guard let requestUrl = self.request(task: task) else {
             completion(ResponseDataModel(statusCode: 999,
                                     error: NetworkError.custom(reason: "RequestUrl Error", title: "Error"),

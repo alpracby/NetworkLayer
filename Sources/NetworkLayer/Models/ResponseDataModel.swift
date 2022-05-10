@@ -14,7 +14,7 @@ public struct ResponseDataModel {
     public let request: URLRequest?
     
     /// Initializer for success responses
-    internal init(statusCode: Int, data: Data, request: URLRequest?) {
+    init(statusCode: Int, data: Data, request: URLRequest?) {
         self.statusCode = statusCode
         self.data = data
         self.error = nil
@@ -22,7 +22,7 @@ public struct ResponseDataModel {
     }
     
     /// Initializer for failed responses
-    internal init(statusCode: Int, error: Error, request: URLRequest?) {
+    init(statusCode: Int, error: Error, request: URLRequest?) {
         self.statusCode = statusCode
         self.data = nil
         self.error = error
@@ -30,7 +30,7 @@ public struct ResponseDataModel {
     }
     
     /// Generic initializer
-    public init(statusCode: Int, data: Data?, error: Error?, request: URLRequest?) {
+    init(statusCode: Int, data: Data?, error: Error?, request: URLRequest?) {
         self.statusCode = statusCode
         self.data = data
         self.error = error
